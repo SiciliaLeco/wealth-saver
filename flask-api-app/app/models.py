@@ -14,4 +14,16 @@ class TransactionModel(db.Model):
 
     def __repr__(self):
         return f'<TransactionModel id={self.id} date={self.date} cost={self.cost} type={self.transaction_type.name}>'
-    
+
+class Debt(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    amount = db.Column(db.Float, nullable=False)
+    interest_rate = db.Column(db.Float, nullable=True)  # Annual interest rate in percent
+    description = db.Column(db.String(200))
+    date = db.Column(db.Date, nullable=False)
+
+class SavingGoal(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    target_amount = db.Column(db.Float, nullable=False)
+    deadline = db.Column(db.Date, nullable=True)
+    suggested = db.Column(db.Boolean, default=True)
