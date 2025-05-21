@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from app.models import db, TransactionModel, TransactionType, Debt, SavingGoal
 from datetime import datetime
-
+from flask import send_from_directory
 api = Blueprint('api', __name__)
 
 
@@ -80,3 +80,9 @@ def suggest_goal():
     db.session.add(goal)
     db.session.commit()
     return jsonify({"suggested_saving_goal": suggested})
+
+
+
+@api.route('/frontend/<path:filename>')
+def frontend_static(filename):
+    return send_from_directory('../frontend', filename)
